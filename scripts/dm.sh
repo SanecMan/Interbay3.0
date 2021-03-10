@@ -13,7 +13,7 @@ for var; do
 done
 
 if [[ $dmepath == "" ]]; then
-    echo "No .dme file specified, aborting."
+    echo "Не указан файл .dme, прерывание."
     exit 1
 fi
 
@@ -23,7 +23,7 @@ fi
 
 cp $dmepath.dme $dmepath.mdme
 if [[ $? != 0 ]]; then
-    echo "Failed to make modified dme, aborting."
+    echo "Не удалось изменить dme, прерывание."
     exit 2
 fi
 
@@ -42,7 +42,7 @@ done
 source "$( dirname "${BASH_SOURCE[0]}" )/sourcedm.sh"
 
 if [[ $DM == "" ]]; then
-    echo "Couldn't find the DreamMaker executable, aborting."
+    echo "Не удалось найти исполняемый файл DreamMaker, прерывание."
     exit 3
 fi
 

@@ -26,8 +26,8 @@ mysqldump -h$HOST -u $USER -p$PASS $SCHEMA --result-file $BAK
 
 #Checks if the file was created, hopefully whether or not the backup worked.
 if [ -f $BAK ];
-	then	echo "Backup completed"
-	else	echo "Backup failed"
+	then	echo "Бэкап удачен. Код 0."
+	else	echo "Бэкап не удачен. Код 1."
 fi
 
 #Common issues
