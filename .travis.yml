@@ -36,8 +36,10 @@ addons:
       - libgcc1:i386
       - libstdc++6:i386
       - oracle-java8-set-default
-      - python
-      - python-pip
+      - gcc-multilib
+      - python3
+      - python3-pip
+      - libssl-dev:i386
 
 script:
   - test/run-test.sh
