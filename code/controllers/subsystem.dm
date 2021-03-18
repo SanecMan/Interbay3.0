@@ -9,7 +9,7 @@
 	var/flags = 0                       //see MC.dm in __DEFINES Most flags must be set on world start to take full effect. (You can also restart the mc to force them to process again)
 
 	var/initialized = FALSE	//set to TRUE after it has been initialized, will obviously never be set if the subsystem doesn't initialize
-	
+
 	//set to 0 to prevent fire() calls, mostly for admin use or subsystems that may be resumed later
 	//	use the SS_NO_FIRE flag instead for systems that never fire to keep it from even being added to the list
 	var/can_fire = TRUE
@@ -160,7 +160,8 @@
 //used to initialize the subsystem AFTER the map has loaded
 /datum/controller/subsystem/Initialize(start_timeofday)
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
-	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
+//	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
+	message_admins("<span class='notice'>Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!")
 	to_chat(world, "<span class='boldannounce'>[msg]</span>")
 	log_world(msg)
 	initialized = TRUE
@@ -169,7 +170,7 @@
 //hook for printing stats to the "MC" statuspanel for admins to see performance and related stats etc.
 /datum/controller/subsystem/stat_entry(msg)
 	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
+		statclick = new/obj/effect/statclick/debug(null, "Гружу...", src)
 
 
 
