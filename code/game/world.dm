@@ -485,7 +485,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		if(config.server) //if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 			open_link(C, "byond://[config.server]")
-	
+
 	if(config.wait_for_sigusr1_reboot && reason != 3)
 		text2file("foo", "reboot_called")
 		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
@@ -521,7 +521,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	return 1
 
 /world/proc/load_motd()
-	join_motd = russian_to_cp1251(file2text("config/motd.txt"))
+	join_motd = file2text("config/motd.txt")
 
 
 /proc/load_configuration()

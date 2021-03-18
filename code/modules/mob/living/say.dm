@@ -96,13 +96,13 @@ proc/get_radio_key_from_channel(var/channel)
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise
 /mob/living/proc/handle_speech_problems(var/list/message_data)
-	var/message = rhtml_decode(message_data[1])
+	var/message = html_decode(message_data[1])
 	var/verb = message_data[2]
 
 	. = 0
 
 	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[ruppertext(message)]!!!"
+		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		message_data[3] = 0
 		. = 1
@@ -115,7 +115,7 @@ proc/get_radio_key_from_channel(var/channel)
 		verb = pick("stammers","stutters")
 		. = 1
 
-	message_data[1] = russian_to_cp1251(message)
+	message_data[1] = message
 	message_data[2] = verb
 
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
@@ -149,19 +149,19 @@ proc/get_radio_key_from_channel(var/channel)
 			return say_dead(message)
 		return
 
-	var/prefix = copytext(message,1,2)
+	var/prefix = copytext_char(message,1,2)
 	if(prefix == get_prefix_key(/decl/prefix/custom_emote))
-		return emote(copytext(message,2))
+		return emote(copytext_char(message,2))
 	if(prefix == get_prefix_key(/decl/prefix/visible_emote))
-		return custom_emote(1, copytext(message,2))
+		return custom_emote(1, copytext_char(message,2))
 
 	//parse the radio code and consume it
 	var/message_mode = parse_message_mode(message, "headset")
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
+			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
-			message = copytext(message,3)
+			message = copytext_char(message,3)
 
 	message = trim_left(message)
 
@@ -169,7 +169,7 @@ proc/get_radio_key_from_channel(var/channel)
 	if(!speaking)
 		speaking = parse_language(message)
 		if(speaking)
-			message = copytext(message,2+length(speaking.key))
+			message = copytext_char(message,2+length(speaking.key))
 		else
 			speaking = get_default_language()
 
@@ -314,7 +314,7 @@ proc/get_radio_key_from_channel(var/channel)
 	else
 		var/list/temp_message = splittext(message, " ") //List each word in the message. We use this for determining speech words and stupid honk disease stuff.
 		var/speechwords = min(round(temp_message.len), 5)
-		var/ending = copytext(message, length(message))
+		var/ending = copytext_char(message, length(message))
 		if(ending == "!")
 			playsound(src, "sound/voice/speech/angery[gender][speechwords].ogg", 75)
 		else

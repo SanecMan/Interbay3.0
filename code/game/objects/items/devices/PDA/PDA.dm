@@ -680,7 +680,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if (in_range(src, U) && loc == U)
 				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
-					note = rustoutf(html_decode(n))
+					note = html_decode(n)
 					notehtml = note
 					note = replacetext(note, "\n", "<br>")
 			else
@@ -991,7 +991,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	last_text = world.time
 	tempmessage.Remove(P)
 	var/datum/reception/reception = get_reception(src, P, t)
-	t = cp1251_to_utf8(reception.message)
+	t = reception.message
 	if(!get_message_server(z))
 		to_chat(U, "<span class='notice'>ERROR: Messaging server is not responding.</span>")
 		tempmessage[P] = t
@@ -1010,9 +1010,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			to_chat(U, "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'.")
 			tempmessage[P] = t
 			return
-		var/utf_convert = rustoutf(html_decode(t))
-		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[utf_convert]", "timestamp" = stationtime2text(), "target" = "\ref[P]")))
-		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[utf_convert]", "timestamp" = stationtime2text(), "target" = "\ref[src]")))
+		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "timestamp" = stationtime2text(), "target" = "\ref[P]")))
+		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "timestamp" = stationtime2text(), "target" = "\ref[src]")))
 		for(var/mob/M in GLOB.player_list)
 			if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
