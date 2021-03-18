@@ -131,6 +131,11 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 		ehjax_send(data = owner.is_afk(29) ? "softPang" : "pang") // SoftPang isn't handled anywhere but it'll always reset the opts.lastPang.
 		sleep(30)
 
+/proc/intonation(text)
+    if(copytext_char(text,-1) == "!")
+        text = "<b>[text]</b>"
+    return text
+
 /proc/syncChatRegexes()
 	for (var/user in GLOB.clients)
 		var/client/C = user
