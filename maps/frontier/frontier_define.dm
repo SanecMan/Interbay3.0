@@ -14,14 +14,14 @@
 
 	allowed_spawns = list("Arrivals Shuttle")
 
-	station_name  = "County of Algol, Frontier Outpost"
-	station_short = "Frontier"
-	dock_name     = "NTTM1-54 Relay"
-	boss_name     = "Kingdom Relay System"
-	boss_short    = "Kingdom"
-	company_name  = "Kingdom Relay System"
-	company_short = "KRS"
-	system_name = "Algol System"
+	station_name  = "Графство Алгол, Пограничная Станция"
+	station_short = "Рубеж"
+	dock_name     = "Реле НТТМ1-54"
+	boss_name     = "Королевская ретрансляционная система"
+	boss_short    = "Королевство"
+	company_name  = "Королевская ретрансляционная система"
+	company_short = "КРС"
+	system_name = "Система Алгола"
 
 	id_hud_icons = 'maps/dreyfus/icons/assignment_hud.dmi'
 
