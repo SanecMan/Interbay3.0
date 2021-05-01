@@ -836,127 +836,8 @@ macro "borgmacro"
 
 
 menu "menu"
-	elem 
-		name = "&File"
-		command = ""
-		saved-params = "is-checked"
-	elem 
-		name = "&Quick screenshot\tF2"
-		command = ".screenshot auto"
-		category = "&File"
-		saved-params = "is-checked"
-	elem 
-		name = "&Save screenshot as...\tShift+F2"
-		command = ".screenshot"
-		category = "&File"
-		saved-params = "is-checked"
-	elem 
-		name = ""
-		command = ""
-		category = "&File"
-		saved-params = "is-checked"
-	elem 
-		name = "&Reconnect"
-		command = ".reconnect"
-		category = "&File"
-		saved-params = "is-checked"
-	elem 
-		name = "&Check ping"
-		command = ".ping"
-		category = "&File"
-		saved-params = "is-checked"
-	elem 
-		name = "&Quit"
-		command = ".quit"
-		category = "&File"
-		saved-params = "is-checked"
-	elem 
-		name = "&Size"
-		command = ""
-		saved-params = "is-checked"
-	elem "stretch"
-		name = "&Stretch to fit"
-		command = ".winset \"mapwindow.map.icon-size=0\""
-		category = "&Size"
-		is-checked = true
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon128"
-		name = "&128x128"
-		command = ".winset \"mapwindow.map.icon-size=128\""
-		category = "&Size"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon96"
-		name = "&96x96"
-		command = ".winset \"mapwindow.map.icon-size=96\""
-		category = "&Size"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon64"
-		name = "&64x64"
-		command = ".winset \"mapwindow.map.icon-size=64\""
-		category = "&Size"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon48"
-		name = "&48x48"
-		command = ".winset \"mapwindow.map.icon-size=48\""
-		category = "&Size"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon32"
-		name = "&32x32"
-		command = ".winset \"mapwindow.map.icon-size=32\""
-		category = "&Size"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem 
-		name = "&Scaling"
-		command = ""
-		saved-params = "is-checked"
-	elem "NN"
-		name = "&Nearest Neighbor"
-		command = ".winset \"mapwindow.map.zoom-mode=distort\""
-		category = "&Scaling"
-		can-check = true
-		group = "scale"
-		saved-params = "is-checked"
-	elem "PS"
-		name = "&Point Sampling"
-		command = ".winset \"mapwindow.map.zoom-mode=normal\""
-		category = "&Scaling"
-		can-check = true
-		group = "scale"
-		saved-params = "is-checked"
-	elem "BL"
-		name = "&Bilinear"
-		command = ".winset \"mapwindow.map.zoom-mode=blur\""
-		category = "&Scaling"
-		can-check = true
-		group = "scale"
-		saved-params = "is-checked"
-	elem 
-		name = "&Help"
-		command = ""
-		saved-params = "is-checked"
-	elem 
-		name = "&Admin help\tF1"
-		command = "adminhelp"
-		category = "&Help"
-		saved-params = "is-checked"
-	elem 
-		name = "&Hotkeys"
-		command = "hotkeys-help"
-		category = "&Help"
-		saved-params = "is-checked"
-		
+
+
 window "mainwindow"
 	elem "mainwindow"
 		type = MAIN
@@ -973,12 +854,15 @@ window "mainwindow"
 		icon = 'icons\\ss13_64.png'
 		macro = "macro"
 		menu = "menu"
+		outer-size = 1936x1096
+		inner-size = 1920x1080
 	elem "asset_cache_browser"
 		type = BROWSER
 		pos = 424,208
 		size = 1x1
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = ""
 	elem "mainvsplit"
@@ -1026,7 +910,6 @@ window "mapwindow"
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
-		auto-format = false
 
 window "outputwindow"
 	elem "outputwindow"
@@ -1051,7 +934,6 @@ window "outputwindow"
 		background-color = #ffffff
 		is-visible = false
 		saved-params = ""
-		auto-format = false
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -1199,17 +1081,17 @@ window "rpane"
 		is-checked = true
 		group = "rpanemode"
 		button-type = pushbox
-	elem "infob"	
-		type = BUTTON	
-		pos = 40,0	
-		size = 60x20	
-		anchor1 = none	
-		anchor2 = none	
-		is-visible = false	
-		saved-params = "is-checked"	
-		text = "Info"	
-		command = ".winset \"rpanewindow.left=infowindow\""	
-		group = "rpanemode"	
+	elem "infob"
+		type = BUTTON
+		pos = 40,0
+		size = 60x20
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = "is-checked"
+		text = "Info"
+		command = ".winset \"rpanewindow.left=infowindow\""
+		group = "rpanemode"
 		button-type = pushbox
 
 window "infowindow"
@@ -1233,3 +1115,4 @@ window "infowindow"
 		highlight-color = #00aa00
 		on-show = ".winset\"rpane.infob.is-visible=true;rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
+
