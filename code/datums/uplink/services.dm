@@ -43,8 +43,8 @@
 	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
 
 	spawn(2)
-		name = "[command_name()] Update Announcement"
-		desc = "Causes a falsified [command_name()] Update."
+		name = "[command_name()] делает сообщение"
+		desc = "Causes a falsified [command_name()] сообщает."
 
 /***************
 * Service Item *

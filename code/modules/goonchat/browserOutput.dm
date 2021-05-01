@@ -37,7 +37,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 		broken = TRUE
 		message_admins("Couldn't start chat for [key_name_admin(owner)]!")
 		. = FALSE
-		alert(owner.mob, "Updated chat window does not exist. If you are using a custom skin file please allow the game to update.")
+		alert(owner.mob, "Не могу загрузить красивый чат, был загружен старый.")
 		return
 
 	if(winget(owner, "browseroutput", "is-visible") == "true") //Already setup

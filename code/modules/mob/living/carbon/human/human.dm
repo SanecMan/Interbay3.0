@@ -1752,7 +1752,7 @@
 		if((SKELETON in mutations) && (!w_uniform) && (!wear_suit))
 			play_xylophone()
 
-/mob/living/carbon/human/proc/exam_self()
+/*/mob/living/carbon/human/proc/exam_self()
 	if(!stat)
 		visible_message( \
 			"<span class='notice'>[src] examines [gender==MALE ? "himself" : "herself"].</span>", \
@@ -1837,6 +1837,76 @@
 
 	else
 		..()
+*/
+/mob/living/carbon/human/proc/exam_self()
+	if(!stat)
+		visible_message("<span class='info'>[src] examines [gender==MALE ? "himself" : "herself"].</span>")
+	var/msg = "<div class='firstdiv'><div class='box'><span class='notice'><b>Let's see how I am doing.</b></span>\n"
+
+	if(!stat)
+		msg += "<span class='info'>I am alive and conscious.</span>\n"
+	if(stat == DEAD)
+		msg += "<span class='danger'>I am dead.</span>\n"
+	else if(sleeping || stat == UNCONSCIOUS)
+		if(!is_asystole())
+			msg += "<span class='danger'>I am unconscious, but still breathing.</span>\n"
+		else
+			msg += "<span class='danger'>I am dying.</span>\n"
+
+	for(var/obj/item/organ/external/org in organs)
+		var/list/status = list()
+		var/hurts = org.get_pain()
+		if(!org.can_feel_pain())
+			hurts = 0
+		if(!can_feel_pain())
+			hurts = 0
+		if((chem_effects[CE_PAINKILLER] < hurts))
+			switch(hurts)
+				if(1 to 49)
+					status += "<span class='danger'><small>pain</small></span>"
+				if(50 to 89)
+					status += "<span class='danger'>PAIN</span>"
+				if(90 to INFINITY)
+					status += "<span class='danger'><big>PAIN</big></span>"
+		if(org.robotic >= ORGAN_ROBOT)
+			switch(org.damage)
+				if(1 to 25)
+					status += "<span class='danger'><small>slightly damaged</small></span>"
+				if(26 to 49)
+					status += "<span class='danger'>damaged</span>"
+				if(50 to 99)
+					status += "<span class='danger'>VERY DAMAGED</span>"
+				if(100 to INFINITY)
+					status += "<span class='danger'><big>BARELY WORKING</big></span>"
+
+		for(var/datum/wound/wound in org.wounds)
+			if(wound.embedded_objects.len)
+				status += "<span class='danger'>SHRAPNEL</span>"
+			if(wound.bandaged)
+				status += "<span class='binfo'>BANDAGED</span>"
+
+		if(org.is_stump())
+			status += "<span class='danger'>MISSING</span>"
+		if(org.status & ORGAN_MUTATED)
+			status += "<span class='danger'>MISSHAPEN</span>"
+		if(org.status & ORGAN_BLEEDING)
+			status += "<span class='danger'>BLEEDING</span>"
+		if(org.dislocated == 2)
+			status += "<span class='danger'>DISLOCATED</span>"
+		if(org.status & ORGAN_BROKEN)
+			status += "<span class='danger'>BROKEN</span>"
+		if(org.splinted)
+			status += "<span class='binfo'>SPLINTED</span>"
+		if(org.status & ORGAN_DEAD)
+			status += "<span class='danger'>NECROTIC</span>"
+		if(org.is_dislocated()) //!org.is_usable() ||
+			status += "<span class='danger'>UNUSABLE</span>"
+		if(status.len)
+			msg += "<b>[capitalize(org.name)]:</b> [or_sign_list(status)]\n"
+		else
+			msg += "<b>[capitalize(org.name)]:</b> <span class='info'>OK</span>\n"
+
+	to_chat(src, "[msg]</div></div>")
 
 /mob/living/carbon/human/proc/resuscitate()
 	if(!is_asystole() || !should_have_organ(BP_HEART))

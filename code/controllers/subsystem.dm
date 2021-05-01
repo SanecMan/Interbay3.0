@@ -162,8 +162,8 @@
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
 //	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
 	message_admins("<span class='notice'>Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!")
-	to_chat(world, "<span class='boldannounce'>[msg]</span>")
-	log_world(msg)
+//	to_chat(world, "<span class='boldannounce'>[msg]</span>")
+//	log_world(msg)
 	initialized = TRUE
 	return time
 

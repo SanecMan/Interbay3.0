@@ -47,15 +47,16 @@
 		if(src)			qdel(src)
 
 
-/mob/proc/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
+///mob/proc/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
+/mob/proc/death(gibbed, show_dead_message = "Я всё.")
 
 	if(stat == DEAD)
 		return 0
 
 	facing_dir = null
 
-	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
-		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
+//	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
+//		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
 	set_stat(DEAD)
 	reset_plane_and_layer()

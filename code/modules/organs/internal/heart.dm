@@ -52,7 +52,7 @@
 	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
 		return
-	
+
 	//If heart is stopped, it isn't going to restart itself randomly.
 	if(pulse == PULSE_NONE)
 		return
@@ -62,7 +62,7 @@
 		should_stop = should_stop || (prob(10) && owner.shock_stage >= 120) //traumatic shock
 		should_stop = should_stop || (prob(10) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop) // The heart has stopped due to going into traumatic or cardiovascular shock.
-			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
+			to_chat(owner, "<span class='danger'>МОЁ СЕРДЦЕ!</span>")
 			pulse = PULSE_NONE
 			return
 	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
